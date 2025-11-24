@@ -305,7 +305,7 @@ void set_robot(){
 
 void set_game_speed(){
 	uint16_t speed = (*pSW)&0xff;
-	PERIOD = (uint64_t)CLOCK_RATE/(speed+1);
+	PERIOD = (uint64_t)CLOCK_RATE*5/(speed*10+1);
 }
 
 uint32_t get_hex(int num){
@@ -465,7 +465,7 @@ void KEY_ISR(void){
 	} else {
 		game_init(0,0);
 	}
-
+	set_game_speed();
 	*(pBUT + 3) = pressed; // clear EdgeCapture register
 }
 
